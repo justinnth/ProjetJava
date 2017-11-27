@@ -1,6 +1,6 @@
 # Projet Java
 
-## Titre d projet à venir
+## Morpion
 
 Benjamin Cligny
 Justin North
