@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package morpion;
+package JeuCartes;
 
 /**
  *
  * @author justinnorth
  */
-public class Morpion {
+public class JeuCartes {
 
     /**
      * @param args the command line arguments
