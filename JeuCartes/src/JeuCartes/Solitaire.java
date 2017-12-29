@@ -5,17 +5,20 @@
  */
 package JeuCartes;
 
+import javax.swing.JPanel;
+
 /**
  *
- * @author justinnorth
+ * @author BernierCorentin
  */
-public class JeuCartes {
+public class Solitaire {
+    private JPanel pnl;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public Solitaire() {
+        
     }
-    
+
+    public JPanel getPnl() {
+        return pnl;
+    }
 }
