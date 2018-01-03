@@ -19,6 +19,10 @@ class CaseProprietes extends Case {
 
     private Proprietes laPropriete;
 
+    public CaseProprietes(Proprietes laPropriete) {
+        this.laPropriete = laPropriete;
+    }
+
     @Override
     public boolean estAchetable() {
         return true;

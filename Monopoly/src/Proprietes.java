@@ -20,7 +20,7 @@ public abstract class Proprietes {
         this.groupe = groupe;
         this.prixAchat = prixAchat;
         this.proprietaire = null;
-        System.out.println(groupe + " " + nom);
+//        System.out.println(groupe + " " + nom);
     }
 
     public Joueur getProprietaire() {
@@ -40,7 +40,7 @@ class Terrains extends Proprietes {
     public Terrains(String nom, int groupe, int prixAchat, int prixMaison) {
         super(nom, groupe, prixAchat);
 
-        System.out.println(prixMaison);
+//        System.out.println(prixMaison);
         this.prixMaison = prixMaison;
         nbMaisons = 0;
     }
