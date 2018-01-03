@@ -65,7 +65,7 @@ public class Partie {
         lePlateau[18] = new CaseProprietes(propNonVendue.get(9));
         lePlateau[19] = new CaseProprietes(propNonVendue.get(10));
         lePlateau[20] = new CaseParcGratuit();
-        lePlateau[21] = new CaseProprietes(propNonVendue.get(11));;
+        lePlateau[21] = new CaseProprietes(propNonVendue.get(11));
         lePlateau[22] = new CaseChances();
         lePlateau[23] = new CaseProprietes(propNonVendue.get(12));
         lePlateau[24] = new CaseProprietes(propNonVendue.get(13));
