@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +15,8 @@ import javax.swing.JPanel;
 public class Fenetre extends JFrame implements ActionListener {
 
     private Menu pnlMenu;
+    private Partie laParte;
+    private Plateau lePlateau;
 
     public Fenetre() {
         super("Le Jeu de Cartes");
@@ -42,7 +40,15 @@ public class Fenetre extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         Fenetre laFenetre = new Fenetre();
-        new Partie(3, 2);
+    }
+    
+    public void commencerPartie(int nbHumains, int nbAI, String nomsJoueurs[]){
+        laParte = new Partie(nbHumains, nbAI);
+        lePlateau = new Plateau();
+        getContentPane().remove(0);
+        getContentPane().add(lePlateau, "Center");
+        validate();
+        repaint();
     }
 
     @Override

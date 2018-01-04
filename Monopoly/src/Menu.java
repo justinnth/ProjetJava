@@ -1,6 +1,5 @@
 
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -105,6 +104,11 @@ public class Menu extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jButton1.setText("Commencer la partie");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,7 +185,6 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSpnNbJoueurHumainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpnNbJoueurHumainStateChanged
-        System.out.println(jSpnNbJoueurHumain.getValue());
         for (int i = 0; i < lesTFs.length; i++) {
             if(i < (int)jSpnNbJoueurHumain.getValue()){
                 lesTFs[i].setEnabled(true);
@@ -199,6 +202,14 @@ public class Menu extends javax.swing.JPanel {
             jSpnNbJoueurHumain.setValue((int)jSpnNbJoueurHumain.getValue()-1);
         }
     }//GEN-LAST:event_jSpnNbJoueurAIStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String lesNomsHumains[] = new String[(int)jSpnNbJoueurHumain.getValue()];
+        for (int i = 0; i < (int)jSpnNbJoueurHumain.getValue(); i++) {
+            lesNomsHumains[i] = lesTFs[i].getText();
+        }
+        laFen.commencerPartie((int)jSpnNbJoueurHumain.getValue(), (int)jSpnNbJoueurAI.getValue(), lesNomsHumains);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
