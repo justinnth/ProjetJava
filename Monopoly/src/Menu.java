@@ -1,4 +1,5 @@
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /*
@@ -204,11 +205,19 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jSpnNbJoueurAIStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String lesNomsHumains[] = new String[(int)jSpnNbJoueurHumain.getValue()];
-        for (int i = 0; i < (int)jSpnNbJoueurHumain.getValue(); i++) {
-            lesNomsHumains[i] = lesTFs[i].getText();
-        }
-        laFen.commencerPartie((int)jSpnNbJoueurHumain.getValue(), (int)jSpnNbJoueurAI.getValue(), lesNomsHumains);
+        if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() < 9 && (int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 1){
+            String lesNomsHumains[] = new String[(int) jSpnNbJoueurHumain.getValue()];
+            for (int i = 0; i < (int) jSpnNbJoueurHumain.getValue(); i++) {
+                lesNomsHumains[i] = lesTFs[i].getText();
+            }
+            laFen.commencerPartie((int) jSpnNbJoueurHumain.getValue(), (int) jSpnNbJoueurAI.getValue(), lesNomsHumains);
+        }else{
+            if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 8){
+                JOptionPane.showMessageDialog(this, "Total de 8 joueurs maximum", "Inane error", JOptionPane.ERROR_MESSAGE);
+            }else if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() < 2){
+                JOptionPane.showMessageDialog(this, "Total minimum de 2 joueurs", "Inane error", JOptionPane.ERROR_MESSAGE);
+            }
+        }     
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

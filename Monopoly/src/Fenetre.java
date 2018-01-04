@@ -12,10 +12,9 @@ import javax.swing.JFrame;
  *
  * @author BernierCorentin
  */
-public class Fenetre extends JFrame implements ActionListener {
+public class Fenetre extends JFrame {
 
     private Menu pnlMenu;
-    private Partie laParte;
     private Plateau lePlateau;
 
     public Fenetre() {
@@ -30,42 +29,16 @@ public class Fenetre extends JFrame implements ActionListener {
 
         this.setVisible(true);
     }
-    
-//    private void remplacerMainPanel(JPanel nouveau){
-//        getContentPane().add(nouveau, "Center");
-//        getContentPane().remove(0);
-//        
-//        repaint();
-//    }
 
     public static void main(String[] args) {
         Fenetre laFenetre = new Fenetre();
     }
     
     public void commencerPartie(int nbHumains, int nbAI, String nomsJoueurs[]){
-        laParte = new Partie(nbHumains, nbAI);
-        lePlateau = new Plateau();
+        lePlateau = new Plateau(nbHumains, nbAI, nomsJoueurs);
         getContentPane().remove(0);
         getContentPane().add(lePlateau, "Center");
         validate();
         repaint();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-        
-//        if(action.equals("Menu")){
-//            remplacerMainPanel(pnlMenu);
-//        }
-//        
-//        if(action.equals("Solitaire")){
-//            System.out.println("wesh ??");
-//            remplacerMainPanel(new JPanel());
-//        }
-        
-//        if(action.equals("Quitter")){
-//            System.exit(0);
-//        }
     }
 }
