@@ -34,8 +34,6 @@ public abstract class Joueur {
         this.couleur = new Color(couleur[0], couleur[1], couleur[2]);
         this.nom = nom;
         this.number = number;
-
-        System.out.println(nom + " " + this.couleur.toString());
     }
 
     public void setArgent(int changement) {

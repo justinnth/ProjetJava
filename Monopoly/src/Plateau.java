@@ -38,16 +38,17 @@ public class Plateau extends javax.swing.JPanel {
         for (int i = 0; i < nbHumains; i++) {
             lesJoueurs.add(new JoueurHumain(couleurs[i], nomsJoueurs[i], i));
         }
-        for (int i = 0; i < nbAI; i++) {
-            lesJoueurs.add(new JoueurIA(couleurs[i + nbHumains], "Bot" + i, i + nbHumains));
-        }
+        //IA non fonctionnel
+//        for (int i = 0; i < nbAI; i++) {
+//            lesJoueurs.add(new JoueurIA(couleurs[i + nbHumains], "Bot" + i, i + nbHumains));
+//        }
 
         String[] prop = {"BOULEVARD DE BELLEVILLE", "RUE LECOURBE", "RUE DE VAUGIRARD", "RUE DE COURCELLES", "AVENUE DE LA REPUBLIQUE", "BOULEVARD DE LA VILETTE", "AVENUE DE NEUILLY", "RUE DE PARADIS", "AVENUE MOZART", "BOULEVARD SAINT-MICHEL", "PLACE PIGALLE", "AVENUE MATIGNON", "BOULEVARD MALESGERBES", "AVENUE HERIN-MARTIN", "FAUBOURG SAINT HONORE", "PLACE DE LA BOURSE", "RUE LA FAYETTE", "AVENUE DE BRETEUIL", "AVENUE FOCH", "BOULEVARD DES CAPUCINES", "AVENUE DES CHAMPS-ELYSEES", "RUE DE LA PAIX", "GARE DE MONTPARNASSE", "GARE DE LYON", "GARE DU NORD", "GARE DE SAINT-LAZARE", "COMPAGNIE DE DISTRIBUTION D'ELECTRICITE", "COMPAGNIE DE DISTRIBUTION DES EAUX"};
         int propPrix[] = {60, 60, 100, 100, 120, 140, 140, 160, 180, 180, 200, 220, 220, 240, 260, 260, 280, 300, 300, 320, 350, 400, 200, 200, 200, 200, 150, 150};
         for (int i = 0; i < prop.length; i++) {
             if (i < 22) {
                 int totalGroupe = 3;
-                if((i + 1) / 3 == 0 || (i + 1) / 3 == 7){
+                if ((i + 1) / 3 == 0 || (i + 1) / 3 == 7) {
                     totalGroupe = 2;
                 }
                 propNonVendue.add(new Terrain(prop[i], (i + 1) / 3, totalGroupe, propPrix[i], ((i + 1) / 6 + 1) * 50));
@@ -99,7 +100,7 @@ public class Plateau extends javax.swing.JPanel {
         lePlateau[37] = new CaseProprietes(propNonVendue.get(20));
         lePlateau[38] = new CaseTaxes("TAXE DE LUXE", 100);
         lePlateau[39] = new CaseProprietes(propNonVendue.get(21));
-        
+
         this.getNouveauJoueur();
     }
 
@@ -123,11 +124,26 @@ public class Plateau extends javax.swing.JPanel {
 
         jLblTourJoueur.setText("Au tour de " + leJoueurActuel.getNom());
         jLblTourJoueur.setForeground(leJoueurActuel.getCouleur());
-        actualiseArgent();
+        actualiseInfoJoueur();
         jBtnTour.setEnabled(false);
 
         optionsActueljBtn = 0;
         jBtnOption.setText("Lancer le dé");
+        jBtnOption.setEnabled(true);
+
+        ecrireHisto("Au tour de " + leJoueurActuel.getNom() + ". Il se trouve sur la case " + getNomPosition());
+    }
+
+    public void ecrireHisto(String nouvelleLigne) {
+        jTAHisto.setText(jTAHisto.getText() + nouvelleLigne + "\n");
+    }
+
+    private String getNomPosition() {
+        return lePlateau[leJoueurActuel.getPositionPlateau()].getNom() + " (" + leJoueurActuel.getPositionPlateau() + ").";
+    }
+
+    private void actualiseInfoJoueur() {
+        jLblArgent.setText(leJoueurActuel.getArgent() + "$");
 
         ArrayList<Propriete> sesProprietes = leJoueurActuel.getSesProprietes();
         String textProp = "";
@@ -148,32 +164,18 @@ public class Plateau extends javax.swing.JPanel {
             textProp += "\n";
         }
         jTAProp.setText(textProp);
-
-        ecrireHisto("Au tour de " + leJoueurActuel.getNom() + ". Il se trouve sur la case "+getNomPosition());
     }
 
-    public void ecrireHisto(String nouvelleLigne) {
-        jTAHisto.setText(nouvelleLigne + "\n" + jTAHisto.getText());
-    }
-
-    private String getNomPosition(){
-        return lePlateau[leJoueurActuel.getPositionPlateau()].getNom()+" ("+leJoueurActuel.getPositionPlateau()+").";
-    }
-    
-    private void actualiseArgent(){
-        jLblArgent.setText(leJoueurActuel.getArgent() + "$");
-    }
-    
-    public void popUp(String titre, String message){
+    public void popUp(String titre, String message) {
         JOptionPane.showMessageDialog(this, message, titre, JOptionPane.PLAIN_MESSAGE);
     }
-    
-    public void ajouterArgentParcGratuit(int quantite){
-        CaseParcGratuit leParc = (CaseParcGratuit)lePlateau[20];
+
+    public void ajouterArgentParcGratuit(int quantite) {
+        CaseParcGratuit leParc = (CaseParcGratuit) lePlateau[20];
         leParc.ajouterArgent(quantite);
     }
-    
-    
+
+    // test afin de dessiner les pions des personnages sur le plateau de jeu (non focntionnel)
 //    public void paintComponent(Graphics g) {
 //        super.paintComponent(g);       
 //
@@ -234,6 +236,11 @@ public class Plateau extends javax.swing.JPanel {
 
         jBtnTour.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jBtnTour.setText("Finir son tour");
+        jBtnTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTourActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Vous avez ");
@@ -326,23 +333,62 @@ public class Plateau extends javax.swing.JPanel {
                     leJoueurActuel.setPrio(1);
                 }
                 ecrireHisto(textHisto);
-                if(leJoueurActuel.getPositionPlateau() + de1 + de2 > 39){
-                    if(leJoueurActuel.getPositionPlateau() + de1 + de2 != 40){
-                        ecrireHisto(leJoueurActuel.getNom()+" gagne 200$ en passant par la case Départ.");
+                if (leJoueurActuel.getPositionPlateau() + de1 + de2 > 39) {
+                    if (leJoueurActuel.getPositionPlateau() + de1 + de2 != 40) {
+                        ecrireHisto(leJoueurActuel.getNom() + " gagne 200$ en passant par la case Départ.");
                     }
                     leJoueurActuel.setArgent(200);
-                    if(!leJoueurActuel.isPeuxAcheter()){
+                    if (!leJoueurActuel.isPeuxAcheter()) {
                         leJoueurActuel.setPeuxAcheter(true);
                     }
                 }
-                leJoueurActuel.setPositionPlateau((leJoueurActuel.getPositionPlateau() + de1 + de2)%40);
-                ecrireHisto(leJoueurActuel.getNom()+" se déplace en case "+getNomPosition());
-                lePlateau[leJoueurActuel.getPositionPlateau()].actionArrive(leJoueurActuel, de1+de2, this);
-                actualiseArgent();
+                leJoueurActuel.setPositionPlateau((leJoueurActuel.getPositionPlateau() + de1 + de2) % 40);
+                ecrireHisto(leJoueurActuel.getNom() + " se déplace en case " + getNomPosition());
+                lePlateau[leJoueurActuel.getPositionPlateau()].actionArrive(leJoueurActuel, de1 + de2, this);
+                jBtnTour.setEnabled(true);
+                actualiseInfoJoueur();
+
+                if (lePlateau[leJoueurActuel.getPositionPlateau()].estAchetable()) {
+                    Propriete laProp = ((CaseProprietes) lePlateau[leJoueurActuel.getPositionPlateau()]).getLaPropriete();
+                    if (laProp.getProprietaire() == null && leJoueurActuel.isPeuxAcheter()) {
+                        optionsActueljBtn = 1;
+                        jBtnOption.setText("Acheter (" + laProp.getPrixAchat() + "$)");
+                        if (leJoueurActuel.getArgent() < laProp.getPrixAchat()) {
+                            jBtnOption.setEnabled(false);
+                        }
+                    } else if (laProp.getProprietaire() != null) {
+                        if (laProp.getProprietaire().equals(leJoueurActuel) && laProp.isTerrain()) {
+                            optionsActueljBtn = 2;
+                            jBtnOption.setText("Construire une maison (" + ((Terrain) laProp).getPrixMaison() + "$)");
+                            if (((Terrain) laProp).getNbMaisons() > 5 || leJoueurActuel.getArgent() < ((Terrain) laProp).getPrixMaison() || !(laProp.aNbDuGroupe() == laProp.getTotalGroupe())) {
+                                jBtnOption.setEnabled(false);
+                            }
+                        } else {
+                            jBtnOption.setEnabled(false);
+                        }
+                    } else {
+                        jBtnOption.setEnabled(false);
+                    }
+                } else {
+                    jBtnOption.setEnabled(false);
+                }
+                break;
+            case 1:
+                Propriete laPropVendue = ((CaseProprietes) lePlateau[leJoueurActuel.getPositionPlateau()]).getLaPropriete();
+                propNonVendue.remove(laPropVendue);
+                leJoueurActuel.ajouterPropriete(laPropVendue);
+                leJoueurActuel.setArgent(-(laPropVendue.getPrixAchat()));
+                this.actualiseInfoJoueur();
+                jBtnOption.setEnabled(false);
                 break;
         }
         repaint();
     }//GEN-LAST:event_jBtnOptionActionPerformed
+
+    private void jBtnTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTourActionPerformed
+        lesJoueurs.add(leJoueurActuel);
+        getNouveauJoueur();
+    }//GEN-LAST:event_jBtnTourActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnOption;

@@ -7,15 +7,15 @@ import javax.swing.JTextField;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author BernierCorentin
  */
 public class Menu extends javax.swing.JPanel {
+
     private Fenetre laFen;
     private JTextField lesTFs[];
-    
+
     /**
      * Creates new form Menu
      */
@@ -187,37 +187,37 @@ public class Menu extends javax.swing.JPanel {
 
     private void jSpnNbJoueurHumainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpnNbJoueurHumainStateChanged
         for (int i = 0; i < lesTFs.length; i++) {
-            if(i < (int)jSpnNbJoueurHumain.getValue()){
+            if (i < (int) jSpnNbJoueurHumain.getValue()) {
                 lesTFs[i].setEnabled(true);
-            }else{
+            } else {
                 lesTFs[i].setEnabled(false);
             }
         }
-        if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 8){
-            jSpnNbJoueurAI.setValue((int)jSpnNbJoueurAI.getValue()-1);
+        if ((int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() > 8) {
+            jSpnNbJoueurAI.setValue((int) jSpnNbJoueurAI.getValue() - 1);
         }
     }//GEN-LAST:event_jSpnNbJoueurHumainStateChanged
 
     private void jSpnNbJoueurAIStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpnNbJoueurAIStateChanged
-        if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 8){
-            jSpnNbJoueurHumain.setValue((int)jSpnNbJoueurHumain.getValue()-1);
+        if ((int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() > 8) {
+            jSpnNbJoueurHumain.setValue((int) jSpnNbJoueurHumain.getValue() - 1);
         }
     }//GEN-LAST:event_jSpnNbJoueurAIStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() < 9 && (int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 1){
+        if ((int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() < 9 && (int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() > 1) {
             String lesNomsHumains[] = new String[(int) jSpnNbJoueurHumain.getValue()];
             for (int i = 0; i < (int) jSpnNbJoueurHumain.getValue(); i++) {
                 lesNomsHumains[i] = lesTFs[i].getText();
             }
             laFen.commencerPartie((int) jSpnNbJoueurHumain.getValue(), (int) jSpnNbJoueurAI.getValue(), lesNomsHumains);
-        }else{
-            if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() > 8){
+        } else {
+            if ((int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() > 8) {
                 JOptionPane.showMessageDialog(this, "Total de 8 joueurs maximum", "Inane error", JOptionPane.ERROR_MESSAGE);
-            }else if((int)jSpnNbJoueurHumain.getValue()+(int)jSpnNbJoueurAI.getValue() < 2){
+            } else if ((int) jSpnNbJoueurHumain.getValue() + (int) jSpnNbJoueurAI.getValue() < 2) {
                 JOptionPane.showMessageDialog(this, "Total minimum de 2 joueurs", "Inane error", JOptionPane.ERROR_MESSAGE);
             }
-        }     
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

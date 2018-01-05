@@ -51,6 +51,10 @@ class CaseProprietes extends Case {
         }
     }
 
+    public Propriete getLaPropriete() {
+        return laPropriete;
+    }
+
 }
 
 class CaseParcGratuit extends Case {
@@ -161,11 +165,11 @@ class CaseCaisseCommunautaires extends Case {
         int quantite = (1+rand.nextInt(9))*10;
         switch (rand.nextInt(2)){
             case 0:
-                lePlat.popUp("Carte chance !", "Vous gagnez "+quantite+"$ !");
+                lePlat.popUp("Carte caisse communautaire !", "Vous gagnez "+quantite+"$ !");
                 leJoueur.setArgent(quantite);
                 break;
             case 1:
-                lePlat.popUp("Carte chance !", "Vous perdez "+quantite+"$ !");
+                lePlat.popUp("Carte caisse communautaire !", "Vous perdez "+quantite+"$ !");
                 leJoueur.setArgent(-quantite);
                 lePlat.ajouterArgentParcGratuit(quantite);
                 break;

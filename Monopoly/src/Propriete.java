@@ -28,12 +28,20 @@ public abstract class Propriete {
         return proprietaire;
     }
 
+    public void setProprietaire(Joueur proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
     public String getNom() {
         return nom;
     }
 
     public int getGroupe() {
         return groupe;
+    }
+
+    public int getTotalGroupe() {
+        return totalGroupe;
     }
 
     public int aNbDuGroupe() {
@@ -44,6 +52,10 @@ public abstract class Propriete {
             }
         }
         return nbDuGroupe;
+    }
+
+    public int getPrixAchat() {
+        return prixAchat;
     }
 
     public abstract boolean isTerrain();
@@ -77,6 +89,10 @@ class Terrain extends Propriete {
         return nbMaisons;
     }
 
+    public int getPrixMaison() {
+        return prixMaison;
+    }
+
     @Override
     public boolean isTerrain() {
         return true;
@@ -86,7 +102,7 @@ class Terrain extends Propriete {
     public int prixPassage(int resDe) {
         switch (nbMaisons) {
             case 0:
-                if (this.groupe == this.aNbDuGroupe()) {
+                if (this.totalGroupe == this.aNbDuGroupe()) {
                     return prixAchat / 5;
                 } else {
                     return prixAchat / 10;

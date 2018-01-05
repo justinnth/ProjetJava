@@ -23,7 +23,7 @@ public class Fenetre extends JFrame {
         this.setResizable(false);
         this.setSize(1366, 768);
         getContentPane().setLayout(new BorderLayout());
-        
+
         pnlMenu = new Menu(this);
         getContentPane().add(pnlMenu, "Center");
 
@@ -33,8 +33,8 @@ public class Fenetre extends JFrame {
     public static void main(String[] args) {
         Fenetre laFenetre = new Fenetre();
     }
-    
-    public void commencerPartie(int nbHumains, int nbAI, String nomsJoueurs[]){
+
+    public void commencerPartie(int nbHumains, int nbAI, String nomsJoueurs[]) {
         lePlateau = new Plateau(nbHumains, nbAI, nomsJoueurs);
         getContentPane().remove(0);
         getContentPane().add(lePlateau, "Center");

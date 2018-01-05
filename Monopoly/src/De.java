@@ -6,15 +6,15 @@ import java.util.Random;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author BernierCorentin
  */
 public class De {
-    public static int lancer(){
+
+    public static int lancer() {
         Random rand = new Random();
-        int res = 1+rand.nextInt(6);
-	return res;
+        int res = 1 + rand.nextInt(6);
+        return res;
     }
 }
